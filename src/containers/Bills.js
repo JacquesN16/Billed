@@ -1,5 +1,5 @@
 import { ROUTES_PATH } from '../constants/routes.js'
-import { formatDate, formatStatus } from "../app/format.js"
+import { formatDate, formatStatus,formatUnix } from "../app/format.js"
 import Logout from "./Logout.js"
 
 export default class {
@@ -39,6 +39,7 @@ export default class {
               return {
                 ...doc,
                 date: formatDate(doc.date),
+                ts: formatUnix(doc.date),
                 status: formatStatus(doc.status)
               }
             } catch(e) {
@@ -52,7 +53,7 @@ export default class {
               }
             }
           })
-          console.log('length', bills.length)
+    
         return bills
       })
     }

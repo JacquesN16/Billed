@@ -17,7 +17,15 @@ export default class NewBill {
   }
   handleChangeFile = e => {
     e.preventDefault()
+
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
+    const isFileTypeValid = file.name.endsWith(' .jpg') || file.name.endsWith('.jpeg') || file.name.endsWith('.png')
+
+    if(!isFileTypeValid){
+      window.alert('Type de document non supporté !')
+      return
+    }
+
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
     const formData = new FormData()
@@ -34,7 +42,7 @@ export default class NewBill {
         }
       })
       .then(({fileUrl, key}) => {
-        console.log(fileUrl)
+      
         this.billId = key
         this.fileUrl = fileUrl
         this.fileName = fileName

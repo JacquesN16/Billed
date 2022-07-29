@@ -33,21 +33,21 @@ export default class NewBill {
     formData.append('file', file)
     formData.append('email', email)
 
-    this.store
-      .bills()
-      .create({
-        data: formData,
-        headers: {
-          noContentType: true
-        }
-      })
-      .then(({fileUrl, key}) => {
-      
-        this.billId = key
-        this.fileUrl = fileUrl
-        this.fileName = fileName
-      }).catch(error => console.error(error))
+    this.store.bills()
+        .create({
+          data: formData,
+          headers: {
+            noContentType: true
+          }
+        })
+        .then(({fileUrl, key}) => {
+        
+          this.billId = key
+          this.fileUrl = fileUrl
+          this.fileName = fileName
+        }).catch(error => console.error(error))
   }
+  
   handleSubmit = e => {
     e.preventDefault()
     console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector(`input[data-testid="datepicker"]`).value)

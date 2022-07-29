@@ -8,7 +8,6 @@ import { bills } from "../fixtures/bills.js"
 import { ROUTES_PATH} from "../constants/routes.js";
 import {localStorageMock} from "../__mocks__/localStorage.js";
 import mockStore from "../__mocks__/store";
-
 import router from "../app/Router.js";
 
 jest.mock("../app/store", () => mockStore)
@@ -35,8 +34,6 @@ describe("Given I am connected as an employee", () => {
     })
     test("Then bills should be ordered from earliest to latest", () => {
       document.body.innerHTML = BillsUI({ data: bills })
-      // TODO refaire le test
-      // const dates = screen.getAllByText(/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i).map(a => a.innerHTML)
       const dates = screen.getAllByTestId("bill-date").map((a) => a.getAttribute("value"))
       const antiChrono = (a, b) => (a > b ? 1 : -1)
       const datesSorted = [...dates].sort(antiChrono)
